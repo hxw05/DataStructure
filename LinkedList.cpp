@@ -163,3 +163,35 @@ void MergeListSequential(List &la, List &lb, List &lc) {
     pc->next = pa ? pa : pb; // 剩余部分处理
     // delete lb;
 }
+
+List Reverse(List L) {
+    El* current = L.next, *nextTargetReverse = nullptr, *nextTarget = nullptr;
+    // L head -> head.next -> head.next.next -> ...
+    //           ↑current
+    // current从L的第一个元素开始
+
+    while (current) {
+        // nextTarget指向current的下一个元素
+        nextTarget = current->next;
+        // [R] null
+        //    ↑nextTargetReverse
+        // [L] head -> head.next -> head.next.next -> ...
+        //              ↑current      ↑nextTarget
+
+        // 将current移入反向后的链表尾部
+        current->next = nextTargetReverse;
+        // [R] head -> head.next -> null
+        //              ↑current    ↑nextTargetReverse
+        // [L] head.next.next -> ...
+        //      ↑nextTarget
+
+        // 将nextTargetReverse指向反向链表的下一个指向目标
+        nextTargetReverse = current;
+        // 将current指向原链表的下一个要移动的目标
+        current = nextTarget;
+        // [R] head -> head.next -> null
+        //           ↑nextTargetReverse
+        // [L] head.next.next -> ...
+        //   ↑current,nextTarget
+    }
+}
