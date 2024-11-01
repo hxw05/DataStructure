@@ -3,4 +3,6 @@
 
 typedef int Status;
 
+#include <iostream>
+
 #endif //DATA_STRUCTURE_COMMON_H

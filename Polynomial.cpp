@@ -1,5 +1,4 @@
-#include <iostream>
-
+#include "common.h"
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "MemoryLeak"
 using namespace std;
