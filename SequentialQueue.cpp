@@ -38,8 +38,10 @@ Status Dequeue(SequentialQueue &q, int &e) {
 }
 
 // 获取队头元素
-int GetHead(SequentialQueue q) {
+Status GetHead(SequentialQueue q, int &e) {
     if (q.front != q.rear) { // 队非空
-        return q.base[q.front];
+        e = q.base[q.front];
+        return 1;
     }
+    return 0;
 }
