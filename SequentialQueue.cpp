@@ -1,6 +1,6 @@
 #include "common.h"
 
-typedef struct Node {
+typedef struct {
     int *base;
     int front;
     int rear;
