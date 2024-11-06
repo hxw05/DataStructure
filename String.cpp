@@ -46,6 +46,42 @@ int Index_BF(FixedLengthString str, FixedLengthString substr, int pos) {
 
     // j > substr.length 表示对于子串已经比较到了串尾
     if (j > substr.length) return i - substr.length;
-    // 其它情况表示比较失败
+        // 其它情况表示比较失败
     else return 0;
+}
+
+int Index_KMP(FixedLengthString str, FixedLengthString substr, int pos, int *next) {
+    int i = pos;
+    int j = 1;
+
+    while (i <= str.length && j <= substr.length) {
+        if (str.characters[i] == substr.characters[j]) {
+            ++i;
+            ++j;
+        } else {
+            // KMP算法核心：i不改变，而是尝试将j移动到更省事的位置
+            // 假设我们已经得到了正确的next数组
+            j = next[j];
+        }
+    }
+
+    // j > substr.length 表示对于子串已经比较到了串尾
+    if (j > substr.length) return i - substr.length;
+        // 其它情况表示比较失败
+    else return 0;
+}
+
+void GetNext(FixedLengthString pattern, int *next) {
+    int j = 1;
+    int k = 0;
+    next[1] = 0;
+    while (j < pattern.length ) {
+        if (k == 0 || pattern.characters[k] == pattern.characters[j]) {
+            ++k;
+            ++j;
+            next[j] = k;
+        } else {
+            k = next[k];
+        }
+    }
 }
