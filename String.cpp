@@ -85,3 +85,19 @@ void GetNext(FixedLengthString pattern, int *next) {
         }
     }
 }
+
+void GetNextVal(FixedLengthString pattern, int *next) {
+    int j = 1;
+    int k = 0;
+    next[1] = 0;
+    while (j < pattern.length ) {
+        if (k == 0 || pattern.characters[k] == pattern.characters[j]) {
+            ++k;
+            ++j;
+            if (pattern.characters[k] != pattern.characters[j]) next[j] = k;
+            else next[j] = next[k];
+        } else {
+            k = next[k];
+        }
+    }
+}
