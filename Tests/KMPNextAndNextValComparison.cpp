@@ -15,12 +15,11 @@ int main() {
     strcpy(str->characters, "0AAABCAABCA");
     str->length = 10;
 
-    vector<int> next, nextval;
-    nextval.resize(999);
-    next.resize(999);
+    int* next = new int[999];
+    int* nextval = new int[999];
 
-    GetNextVector(*str, next);
-    GetNextValVector(*str, nextval);
+    GetNext(*str, next);
+    GetNextVal(*str, nextval);
 
     for (int i = 1; i <= str->length; i++) cout << str->characters[i] << " ";
     cout << endl;
