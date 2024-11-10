@@ -1,4 +1,5 @@
 #define MAXLEN 255
+#include "vector"
 
 typedef struct {
     char characters[MAXLEN + 1];
@@ -86,7 +87,23 @@ void GetNext(FixedLengthString pattern, int *next) {
     }
 }
 
-void GetNextVal(FixedLengthString pattern, int *next) {
+void GetNextVal(FixedLengthString pattern, int *nextval) {
+    int j = 1;
+    int k = 0;
+    nextval[1] = 0;
+    while (j < pattern.length ) {
+        if (k == 0 || pattern.characters[k] == pattern.characters[j]) {
+            ++k;
+            ++j;
+            if (pattern.characters[k] != pattern.characters[j]) nextval[j] = k;
+            else nextval[j] = nextval[k];
+        } else {
+            k = nextval[k];
+        }
+    }
+}
+
+void GetNextVector(FixedLengthString pattern, std::vector<int>& next) {
     int j = 1;
     int k = 0;
     next[1] = 0;
@@ -94,10 +111,25 @@ void GetNextVal(FixedLengthString pattern, int *next) {
         if (k == 0 || pattern.characters[k] == pattern.characters[j]) {
             ++k;
             ++j;
-            if (pattern.characters[k] != pattern.characters[j]) next[j] = k;
-            else next[j] = next[k];
+            next[j] = k;
         } else {
             k = next[k];
+        }
+    }
+}
+
+void GetNextValVector(FixedLengthString pattern, std::vector<int>& nextval) {
+    int j = 1;
+    int k = 0;
+    nextval[1] = 0;
+    while (j < pattern.length ) {
+        if (k == 0 || pattern.characters[k] == pattern.characters[j]) {
+            ++k;
+            ++j;
+            if (pattern.characters[k] != pattern.characters[j]) nextval[j] = k;
+            else nextval[j] = nextval[k];
+        } else {
+            k = nextval[k];
         }
     }
 }
